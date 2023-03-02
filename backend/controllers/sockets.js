@@ -1,10 +1,16 @@
-export const socketController = (socket) => {
-  console.log(socket.id);
+import TiketSchema from "../models/TiketSchema.js";
+import createTiketService from "../service/createTiketService.js";
 
-  socket.on("sendMessage", (payload, /* ejemplo de callback */ callback) => {
-    socket.broadcast.emit("resend", payload);
-    callback(
-      socket.id
-    ); /* de esta manera podemos enviar una respuesta rapida, si todo salio bien o mal. */
+export const socketController = async (socket) => {
+  const [tikets, turns] = await Promise.all([
+    TiketSchema.find({ state: "pending" }),
+    TiketSchema.count(),
+  ]);
+  socket.emit("turns", turns);
+  socket.on("createTiket", async () => {
+    const tiket = await createTiketService();
+    socket.emit("tiket", tiket);
   });
+
+  socket.emit("tikets", tikets);
 };
