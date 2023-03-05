@@ -11,8 +11,11 @@ const Tiket = Schema({
   },
   state: {
     type: String,
-    enum: ["complete", "pending"],
+    enum: ["attending", "pending", "complete"],
     default: "pending",
+  },
+  desktop: {
+    type: String,
   },
 });
 

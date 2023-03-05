@@ -10,8 +10,7 @@ socket.on("turns", (turns) => {
 });
 
 btn.addEventListener("click", () => {
-  socket.emit("createTiket");
-  socket.on("tiket", (tiket) => {
+  socket.emit("createTiket", (tiket) => {
     textTiket.innerText = `Turno : ${tiket.turn}`;
   });
 });

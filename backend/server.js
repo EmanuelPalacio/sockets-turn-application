@@ -8,7 +8,7 @@ import { socketController } from "./controllers/sockets.js";
 /* ------ SERVER ------- */
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
+export const io = new Server(httpServer, {
   /* options */
   cors: {
     origin: "*",
