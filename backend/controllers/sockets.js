@@ -6,6 +6,7 @@ import {
   pendingTikets,
   turnComplete,
   turns,
+  viewTikets,
 } from "../service/requestDatabase.js";
 
 export const socketController = async (socket) => {
@@ -13,6 +14,10 @@ export const socketController = async (socket) => {
 
   socket.on("createTiket", async (callback) => {
     const tiket = await createTiketService();
+    console.log(tiket.date);
+    if (tiket.turn == 15) {
+      await TiketSchema.deleteMany({});
+    }
     callback(tiket);
     socket.broadcast.emit("pendingCount", await pendingCount());
   });
@@ -30,12 +35,13 @@ export const socketController = async (socket) => {
       });
       io.emit("pendingCount", await pendingCount());
       tiket(selectTiket[0]);
+      socket.broadcast.emit("viewTikets", await viewTikets());
     }
   });
 
   socket.on("turnComplete", async (desktop) => {
-    console.log(desktop);
-    const test = await turnComplete(desktop);
-    console.log(test);
+    await turnComplete(desktop);
   });
+
+  socket.emit("viewTikets", await viewTikets());
 };

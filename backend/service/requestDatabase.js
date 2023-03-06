@@ -15,3 +15,6 @@ export const turnComplete = async (desktop) => {
     { state: "complete" }
   );
 };
+export const viewTikets = async () => {
+  return await TiketSchema.find({ state: "attending" }).sort({ turn: -1 });
+};
