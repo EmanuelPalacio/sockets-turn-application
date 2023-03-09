@@ -1,6 +1,6 @@
 const socket = io("http://localhost:8080");
 const btn = document.querySelector(".btn");
-const textTiket = document.querySelector("#lblNuevoTicket");
+const textTiket = document.querySelector("#lblNewTicket");
 
 socket.on("turns", (turns) => {
   if (turns === 0) {

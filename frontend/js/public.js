@@ -6,9 +6,7 @@ socket.on("viewTikets", (tikets) => {
   if (tikets.length !== 0) {
     tikets.forEach((tiket, index) => {
       const lblTicket = document.querySelector(`#lblTicket${index + 1}`);
-      const lblEscritorio = document.querySelector(
-        `#lblEscritorio${index + 1}`
-      );
+      const lblEscritorio = document.querySelector(`#lblDesktop${index + 1}`);
 
       lblTicket.innerText = `Turno: ${tiket.turn}`;
       lblEscritorio.innerText = tiket.desktop;

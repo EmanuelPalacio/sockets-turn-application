@@ -1,5 +1,5 @@
 const socket = io("http://localhost:8080");
-const pending = document.querySelector("#lblPendientes");
+const pending = document.querySelector("#lblPendings");
 const alert = document.querySelector(".alert");
 const btnAssing = document.querySelector(".btn");
 const btnComplete = document.querySelector("#completeTiket");
